@@ -41,3 +41,11 @@ https://data.heroku.com/datastores/
 
 ## Database Admin
 `npx prisma studio`
+
+## Update Prisma Client
+
+After schema updates, run `prisma generate` to update the Prisma client
+
+## How to DB and Auth
+
+https://vercel.com/guides/nextjs-prisma-postgres
