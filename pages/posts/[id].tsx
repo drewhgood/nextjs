@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import {  InferGetStaticPropsType } from 'next'
-import prisma from '../../lib/prisma'
+import {prisma} from '../../lib/prisma'
 
 export default function Home({post}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
