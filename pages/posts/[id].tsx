@@ -12,8 +12,14 @@ export default function Home({post}: InferGetStaticPropsType<typeof getStaticPro
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Post: {post.id}</h1>
-        <h3 className={styles.title}>Post: {post.title}</h3>
+        {
+          post && (
+            <>
+            <h1 className={styles.title}>Post: {post.id}</h1>
+            <h3 className={styles.title}>Post: {post.title}</h3>
+            </>
+          )
+}
       </main>
     </div>
   );
@@ -28,7 +34,7 @@ export async function getStaticPaths() {
   const allPosts = await prisma.post.findMany() || [];
 
   return {
-    paths: allPosts.map(({ id }) => `/posts/${id}`) || [],
+    paths: allPosts.filter(v => v).map(({ id }) => `/posts/${id}`) || [],
     fallback: true,
   };
 }
