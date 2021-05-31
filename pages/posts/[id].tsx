@@ -17,14 +17,14 @@ export default function Home({ post }: InferGetServerSidePropsType<typeof getSer
                        {post && (
                          <>
                            <h1 className={styles.title}>
-                             Post:{' '}
+                             
                              {
                                //@ts-ignore
                                post.id
                              }
                            </h1>
                            <h3 className={styles.title}>
-                             Post:{' '}
+                             
                              {
                                //@ts-ignore
                                post.title
@@ -37,16 +37,19 @@ export default function Home({ post }: InferGetServerSidePropsType<typeof getSer
                  );
                }
 
-export const getServerSideProps = async ({params}) => {
-  const post = await prisma.post.findUnique({ where: { id: Number(params.id) } });
-  return { props: { post } }
-}
+// export const getServerSideProps = async ({params}) => {
+//   const post = await prisma.post.findUnique({ where: { id: Number(params.id) } });
+//   return { props: { post } }
+// }
 
-export async function getServerSidePaths() {
-  const allPosts = await prisma.post.findMany() || [];
+export async function getServerSideProps(req) {
+  
+  try {
+    const post = (await prisma.post.findUnique({ where: { id: Number(req.params.id) } })) || [];
+    
 
-  return {
-    paths: allPosts.filter(v => v).map(({ id }) => `/posts/${id}`) || [],
-    fallback: true,
-  };
+    return { props: { post } }
+  } catch {
+    return { props: { post: {} } };
+  }
 }
