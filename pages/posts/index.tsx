@@ -39,8 +39,9 @@ export async function getServerSideProps(context) {
    const posts = (await prisma.post.findMany()) || [];
    const postIds = posts.map(({ id }) => id);
    
-   return { props: {postIds: [1, 2, 3] }}
+   
+   return { props: { postIds }}
  } catch {
-   return { props: { postIds: [1, 2, 3] } };
+   return { props: { postIds: [] } };
  }
 }
