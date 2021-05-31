@@ -4,8 +4,10 @@ import { InferGetServerSidePropsType } from 'next';
 import {prisma} from '../../lib/prisma';
 import Link from 'next/link'
 
+
 export default function Home({ postIds }: InferGetServerSidePropsType<typeof getServerSideProps>) {
                  return (
+                  
                    <div className={styles.container}>
                      <Head>
                        <title>Create Next App</title>
@@ -32,8 +34,13 @@ export default function Home({ postIds }: InferGetServerSidePropsType<typeof get
                  );
                }
 
-export const getServerSideProps = async ({ params }) => {
-  const posts = await prisma.post.findMany() || [];
-  const postIds = posts.map(({id}) => id)
-  return { props: { postIds } };
-};
+export async function getServerSideProps(context) {
+ try {
+   const posts = (await prisma.post.findMany()) || [];
+   const postIds = posts.map(({ id }) => id);
+   
+   return { props: {postIds: [1, 2, 3] }}
+ } catch {
+   return { props: { postIds: [1, 2, 3] } };
+ }
+}
