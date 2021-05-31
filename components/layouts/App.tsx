@@ -189,7 +189,7 @@ export const App = ({ children, title }: AppProps) => {
               <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{title}</h1>
             </div>
           </div>
-          <div>{children}</div>
+          <div className="px-4 mt-6 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
     </div>

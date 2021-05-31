@@ -20,3 +20,14 @@ model Car {
   make     String
   model    String
 }
+
+model BinType {
+  id            Int     @default(autoincrement()) @id
+  name          String
+  height        Int
+  width         Int
+  length        Int
+  active        Boolean @default(false)
+  serviceStart  DateTime?
+  serviceEnd    DateTime?
+}
