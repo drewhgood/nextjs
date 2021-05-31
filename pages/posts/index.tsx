@@ -6,30 +6,28 @@ import Link from 'next/link';
 
 export default function Home({ postIds }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-                   <div className={styles.container}>
-                     <Head>
-                       <title>Create Next App</title>
-                       <link rel="icon" href="/favicon.ico" />
-                     </Head>
-
-                     <main className={styles.main}>
-                       <h1>All Posts</h1>
-                       <ul>
-                         {
-                           // @ts-ignore
-                         postIds.map((id) => {
-                           return (
-                             <li>
-                               <Link href={`/posts/${id}`}>
-                                 <a>{`Post: ${id}`}</a>
-                               </Link>
-                             </li>
-                           );
-                         })}
-                       </ul>
-                     </main>
-                   </div>
+      <main className={styles.main}>
+        <h1>All Posts</h1>
+        <ul>
+          {// @ts-ignore
+          postIds.map(id => {
+            return (
+              <li>
+                <Link href={`/posts/${id}`}>
+                  <a>{`Post: ${id}`}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    </div>
   );
 }
 
