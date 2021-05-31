@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 import { InferGetServerSidePropsType } from 'next';
-import {prisma} from '../../lib/prisma';
-import Link from 'next/link'
-
+import { prisma } from '../../lib/prisma';
+import Link from 'next/link';
 
 export default function Home({ postIds }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-                 return (
-                  
+  return (
+
                    <div className={styles.container}>
                      <Head>
                        <title>Create Next App</title>
@@ -18,7 +17,7 @@ export default function Home({ postIds }: InferGetServerSidePropsType<typeof get
                        <h1>All Posts</h1>
                        <ul>
                          {
-                           //@ts-ignore
+                           // @ts-ignore
                          postIds.map((id) => {
                            return (
                              <li>
@@ -31,17 +30,16 @@ export default function Home({ postIds }: InferGetServerSidePropsType<typeof get
                        </ul>
                      </main>
                    </div>
-                 );
-               }
+  );
+}
 
 export async function getServerSideProps(context) {
- try {
-   const posts = (await prisma.post.findMany()) || [];
-   const postIds = posts.map(({ id }) => id);
-   
-   
-   return { props: { postIds }}
- } catch {
-   return { props: { postIds: [] } };
- }
+  try {
+    const posts = (await prisma.post.findMany()) || [];
+    const postIds = posts.map(({ id }) => id);
+
+    return { props: { postIds } };
+  } catch {
+    return { props: { postIds: [] } };
+  }
 }

@@ -14,3 +14,9 @@ model Post {
   id        Int     @default(autoincrement()) @id
   title     String
 }
+
+model Car {
+  id       Int     @default(autoincrement()) @id
+  make     String
+  model    String
+}
