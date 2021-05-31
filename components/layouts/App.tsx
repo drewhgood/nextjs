@@ -14,7 +14,7 @@
   }
   ```
 */
-import { Fragment, useState } from 'react';
+import { Fragment, ReactNode, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import { ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon } from '@heroicons/react/outline';
 import {
@@ -38,7 +38,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+interface AppProps {
+  children?: ReactNode;
+  title: string;
+}
+
+export const App = ({ children, title }: AppProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -181,11 +186,12 @@ export default function Example() {
           {/* Page title & actions */}
           <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <div className="flex-1 min-w-0">
-              <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
+              <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{title}</h1>
             </div>
           </div>
+          <div>{children}</div>
         </main>
       </div>
     </div>
   );
-}
+};
